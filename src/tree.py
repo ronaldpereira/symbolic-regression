@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import numpy as np
+
 class Node:
     def __init__(self, data):
         self.left = None
@@ -13,10 +15,30 @@ class Node:
             self.right = Node(data)
 
     def print_subtree(self):
+        print('(', end='')
         if self.left:
             self.left.print_subtree()
 
-        print(self.data)
+        print(self.data, end='')
         
         if self.right:
             self.right.print_subtree()
+        print(')', end='')
+
+
+class RandomTree:
+    @staticmethod
+    def generate(randomSeed=0, maxDepth=7):
+        np.random.seed(randomSeed)
+
+                    
+
+    @staticmethod
+    def getBinaryNonTerminal():
+        binNonTerminalList = ['add', '-', '*', '/', '^']
+
+
+    @staticmethod
+    def getUnaryNonTerminal():
+        unNonTerminalList = ['sqrt', 'sin', 'cos']
+
