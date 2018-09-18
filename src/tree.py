@@ -2,6 +2,8 @@
 
 import numpy as np
 
+numberOfFeatures = 2
+
 class Node:
     def __init__(self, data):
         self.left = None
@@ -28,9 +30,9 @@ class Node:
 
 class RandomTree:
     @staticmethod
-    def generate(randomSeed=0, maxDepth=7):
+    def generate_child(randomSeed=0, maxDepth=7):
         np.random.seed(randomSeed)
-
+        # must generate all node child within this class
                     
 
     @staticmethod
@@ -41,4 +43,16 @@ class RandomTree:
     @staticmethod
     def getUnaryNonTerminal():
         unNonTerminalList = ['sqrt', 'sin', 'cos']
+
+    @staticmethod
+    def getTerminal():
+        random = np.random.randint(0, 10)
+
+        if random < 5:
+            #gets variable Xi terminal
+            return 'X' + str(np.random.randint(0, numberOfFeatures))
+        
+        else:
+            #gets random constant
+            return np.random.uniform(-100, 100)
 
