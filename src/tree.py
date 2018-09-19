@@ -36,13 +36,13 @@ class RandomTree:
                     
 
     @staticmethod
-    def getBinaryNonTerminal():
-        binNonTerminalList = ['add', '-', '*', '/', '^']
+    def getBinaryFunction():
+        binaryFunctionList = ['add', '-', '*', '/', '^']
 
 
     @staticmethod
-    def getUnaryNonTerminal():
-        unNonTerminalList = ['sqrt', 'sin', 'cos']
+    def getUnaryFunction():
+        unaryFunctionList = ['sqrt', 'sin', 'cos']
 
     @staticmethod
     def getTerminal():
