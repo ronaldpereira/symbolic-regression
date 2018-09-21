@@ -4,7 +4,6 @@ import sys
 import libs.data as data
 import libs.tree as tree
 import libs.fitness as fitness
-import math
 
 treeMaxDepth = 7
 
@@ -15,14 +14,20 @@ class Individual:
     def generateRandomTree(self, randomSeed=None):
         return tree.RandomTree(dataHolder.numberOfVariables, randomSeed)
 
+    def calculateFitness(self, fitness):
+        self.fitness = fitness.calculate(self.root)
+
+
 dataHolder = data.Data('./input/datasets/synth1/synth1-train.csv')
+
+fit = fitness.Fitness(dataHolder.train)
 
 population = []
 for index in range(0, int(sys.argv[1])):
-    print(index)
     population.append(Individual(index))
-    population[index].root.print_tree()
+    population[index].calculateFitness(fit)
 
-fit = fitness.Fitness(dataHolder.train)
-#fit.calculate(ind.root)
-print(eval('((0.804694852981791)**(((math.cos(math.log((250)**(15.142228210831043))))+(math.sqrt(math.sin((76.3139001845522)/(11.011117825660167)))))*(91.99716498921566)))'))
+best_ind = min(population, key=lambda x: x.fitness)
+print('Best Individual:')
+print(best_ind.root.print_tree())
+print('mininum fitness', best_ind.fitness)

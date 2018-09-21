@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 import numpy as np
+from io import StringIO
+import sys
 
 class Node:
     def __init__(self):
@@ -20,21 +22,29 @@ class Node:
             self.left = Node()
             self.right = Node()
 
-    def _print_subtree(self):
+    def get_tree(self):
         print('(', end='')
         if self.left:
-            self.left._print_subtree()
+            self.left.get_tree()
 
         if(self.data is not None):
             print(self.data, end='')
-        
+
         if self.right:
-            self.right._print_subtree()
+            self.right.get_tree()
         print(')', end='')
 
     def print_tree(self):
-        self._print_subtree()
-        print()
+        # It changes the stdout to be stored on the tree variable and then restore it to stdout
+        old_stdout = sys.stdout
+        tree = StringIO()
+        sys.stdout = tree
+
+        self.get_tree()
+
+        sys.stdout = old_stdout
+
+        return tree.getvalue()
 
 
 class RandomTree:
@@ -81,12 +91,12 @@ class RandomTree:
         return functionList[np.random.randint(0, len(functionList))]()
 
     def get_binary_function(self):
-        binaryFunctionList = ['+', '-', '*', '/', '**']
+        binaryFunctionList = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']
 
         return binaryFunctionList[np.random.randint(0, len(binaryFunctionList))], 2
 
     def get_unary_function(self):
-        unaryFunctionList = ['math.sqrt', 'math.sin', 'math.cos', 'math.log', 'math.log2', 'math.log10']
+        unaryFunctionList = ['prot_math.sqrt', 'math.sin', 'math.cos', 'prot_math.log', 'prot_math.log2', 'prot_math.log10']
 
         return unaryFunctionList[np.random.randint(0, len(unaryFunctionList))], 1
 
@@ -99,4 +109,4 @@ class RandomTree:
         
         else:
             # returns random constant
-            return np.random.uniform(0, 100), 0
+            return np.random.uniform(-100, 100), 0
