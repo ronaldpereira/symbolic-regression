@@ -1,5 +1,5 @@
 # Run command example:
-# make POP_NUM=20
+# make POP=20
 
 run:
-	python3 symbolic_regression.py $(POP_NUM)
+	python3 symbolic_regression.py $(POP)
