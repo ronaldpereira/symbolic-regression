@@ -4,6 +4,7 @@ import sys
 import libs.data as data
 import libs.tree as tree
 import libs.fitness as fitness
+import libs.statistics as statistics
 
 treeMaxDepth = 7
 
@@ -27,7 +28,11 @@ for index in range(0, int(sys.argv[1])):
     population.append(Individual(index))
     population[index].calculateFitness(fit)
 
-best_ind = min(population, key=lambda x: x.fitness)
-print('Best Individual:')
-print(best_ind.root.print_tree())
-print('mininum fitness', best_ind.fitness)
+rand_node = population[5].root.get_random_node()
+print(rand_node.print_tree())
+rand_node = population[6].root.get_random_node()
+print(rand_node.print_tree())
+rand_node = population[8].root.get_random_node()
+print(rand_node.print_tree())
+
+statistics.get_statistics(population)

@@ -17,5 +17,5 @@ class Data:
             header = ['X[' + str(i) + ']' for i in range(0, len(self.test.iloc[0]) - 1)] + ['Y']
             self.test.columns = header
 
-        if self.train is not None:
+        if not self.train.empty:
             self.numberOfVariables = len(self.train.iloc[0]) - 1

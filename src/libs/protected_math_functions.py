@@ -5,7 +5,7 @@ import math
 def pow(x):
     if type(x) == int or type(x) == float:
         if x > 1 or x < 1:
-            return x
+            return int(x)
 
     return 0
 

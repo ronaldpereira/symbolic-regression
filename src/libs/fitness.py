@@ -22,10 +22,7 @@ class Fitness:
             try:
                 eval_ind = self.evaluate_individual(treeRoot, index)
 
-                if type(eval_ind) == int or type(eval_ind) == float:
-                    sum_of_squares += (self.train.loc[index, 'Y'] - eval_ind) ** 2
-                else:
-                    sum_of_squares += math.inf
+                sum_of_squares += (self.train.loc[index, 'Y'] - eval_ind) ** 2
             except:
                 sum_of_squares = math.inf
 
