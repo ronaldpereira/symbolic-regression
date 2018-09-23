@@ -33,10 +33,18 @@ for index in range(0, population_size):
     population[index].calculateFitness(fit)
 
 print(population[1].root.print_tree())
-mut = mutation.Mutation(0.9, 15)
-random_node = mut.execute(population[1].tree)
-if random_node:
-    print(random_node.root.print_tree())
-    print(random_node.root.get_subtree_height())
+print(population[1].root.get_subtree_height())
+print()
+print(population[15].root.print_tree())
+print(population[15].root.get_subtree_height())
+print()
+cross = crossover.Crossover(0.9, 15)
+random_node1, random_node2 = cross.execute(population[1].tree, population[15].tree)
+if random_node1 and random_node2:
+    print(random_node1.root.print_tree())
+    print(random_node1.root.get_subtree_height())
+    print()
+    print(random_node2.root.print_tree())
+    print(random_node2.root.get_subtree_height())
 
 #statistics.get_statistics(population)
