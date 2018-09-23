@@ -1,5 +1,12 @@
-# Run command example:
-# make POP=100 GEN=20 MUT=0.05 CROSS=0.7 TRAIN=./input/datasets/synth2/synth2-train.csv
+help:
+	@echo '\*\*\*HELP MENU\*\*\*'
+	@echo 'To execute the script, run the following:'
+	@echo 'make POP=<POPULATION_SIZE> GEN=<NUMBER_OF_GENERATIONS> MUT=<PROBABILITY_OF_MUTATION> CROSS=<PROBABILITY_OF_CROSSOVER> TRAIN=<TRAIN_DATA_PATH>'
+	@echo 'For example:'
+	@echo 'make POP=50 GEN=20 MUT=0.05 CROSS=0.7 TRAIN=./input/datasets/synth2/synth2-train.csv'
 
 run:
 	python3 symbolic_regression.py $(POP) $(GEN) $(MUT) $(CROSS) $(TRAIN)
+
+test:
+	python3 symbolic_regression.py 50 20 0.05 0.7 ./input/datasets/synth2/synth2-train.csv
