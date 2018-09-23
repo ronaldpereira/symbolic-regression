@@ -22,6 +22,12 @@ class Node:
             self.left = Node()
             self.right = Node()
 
+    def insert_subtree(self, subtree, direction):
+        if direction == 'l':
+            self.left = subtree
+        elif direction == 'r':
+            self.right = subtree
+
     def get_tree(self):
         print('(', end='')
         if self.left:
@@ -90,26 +96,48 @@ class Node:
         else:
             return self
 
+    def get_node_father(self, node=None):
+        if node:
+            if self == node:
+                return self, None
+            else:
+                if self.left:
+                    if self.left == node:
+                        return self, 'l'
+                    else:
+                        return self.left.get_node_father(node)
+                if self.right:
+                    if self.right == node:
+                        return self, 'r'
+                    else:
+                        return self.right.get_node_father(node)
+
+        return None, None
+
 
 class RandomTree:
-    def __init__(self, maxNumberVariables, randomSeed=None, maxDepth=7):
-        if randomSeed is not None:
-            np.random.seed(randomSeed)
+    def __init__(self, max_variables, random_seed=None, max_depth=7):
+        if random_seed:
+            np.random.seed(random_seed)
 
-        self.maxDepth = maxDepth
-        self.maxNumberVariables = maxNumberVariables
-        self.root = self.generate_node()
+        self.max_depth = max_depth
+        self.max_variables = max_variables
 
-        if maxDepth > 0:
+        if max_depth > 0:
+            self.root = self.generate_node()
+
             if self.root.childNumber == 1:
                 self.root.right = self.generate_subtree(self.root.right)
             elif self.root.childNumber == 2:
                 self.root.left = self.generate_subtree(self.root.left)
                 self.root.right = self.generate_subtree(self.root.right)
 
+        else:
+            self.root = self.generate_node(True)
+
     def generate_subtree(self, node, actualDepth=1):
         actualDepth += 1
-        node = self.generate_node(actualDepth >= self.maxDepth)
+        node = self.generate_node(actualDepth >= self.max_depth)
 
         if node.childNumber == 1:
             node.right = self.generate_subtree(node.right, actualDepth)
@@ -131,26 +159,26 @@ class RandomTree:
         return node
 
     def random_function_call(self):
-        functionList = [self.get_binary_function, self.get_unary_function, self.get_terminal]
+        function_list = [self.get_binary_function, self.get_unary_function, self.get_terminal]
 
-        return functionList[np.random.randint(0, len(functionList))]()
+        return function_list[np.random.randint(0, len(function_list))]()
 
     def get_binary_function(self):
-        binaryFunctionList = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']
+        binary_function_list = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']
 
-        return binaryFunctionList[np.random.randint(0, len(binaryFunctionList))], 2
+        return binary_function_list[np.random.randint(0, len(binary_function_list))], 2
 
     def get_unary_function(self):
-        unaryFunctionList = ['prot_math.sqrt', 'math.sin', 'math.cos', 'prot_math.log', 'prot_math.log2', 'prot_math.log10']
+        unary_function_list = ['prot_math.sqrt', 'math.sin', 'math.cos', 'prot_math.log', 'prot_math.log2', 'prot_math.log10']
 
-        return unaryFunctionList[np.random.randint(0, len(unaryFunctionList))], 1
+        return unary_function_list[np.random.randint(0, len(unary_function_list))], 1
 
     def get_terminal(self):
         random = np.random.rand()
 
         if random < 0.5:
             # returns variable Xi terminal
-            return 'X[' + str(np.random.randint(0, self.maxNumberVariables)) + ']', 0
+            return 'X[' + str(np.random.randint(0, self.max_variables)) + ']', 0
         else:
             # returns random constant
             return np.random.uniform(-100, 100), 0
