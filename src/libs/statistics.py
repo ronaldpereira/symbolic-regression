@@ -1,20 +1,50 @@
 #!/usr/bin/python3
 
-def get_statistics(population):
-    best_individual(population)
-    worst_individual(population)
-    mean_fitness(population)
+class Statistics:
+    def __init__(self):
+        self.n_best_crossover_child = 0
+        self.n_worse_crossover_child = 0
+        self.n_repeated_individuals = 0
 
-def best_individual(population):
-    best_ind = min(population, key=lambda x: x.fitness)
-    print('Best Individual Fitness', best_ind.fitness)
+    def get_statistics(self, population):
+        self.population = population
+        self.best_individual()
+        self.worst_individual()
+        self.mean_fitness()
+        self.get_crossover_best_and_worse()
 
-def worst_individual(population):
-    worst_ind = max(population, key=lambda x: x.fitness)
-    print('Worst Individual Fitness', worst_ind.fitness)
+    def best_individual(self):
+        best_ind = min(self.population, key=lambda x: x.fitness)
+        print('Best Individual Fitness', best_ind.fitness)
 
-def mean_fitness(population):
-    total_fitness = 0
-    for individual in population:
-        total_fitness += individual.fitness
-    print('Mean Fitness:', total_fitness / len(population))
+    def worst_individual(self):
+        worst_ind = max(self.population, key=lambda x: x.fitness)
+        print('Worst Individual Fitness', worst_ind.fitness)
+
+    def mean_fitness(self):
+        total_fitness = 0
+        for individual in self.population:
+            total_fitness += individual.fitness
+        print('Mean Fitness:', total_fitness / len(self.population))
+
+    def set_crossover_best_and_worse(self, crossover_population):
+        fathers_mean = (crossover_population[0].fitness + crossover_population[1].fitness) / 2
+        if crossover_population[2].fitness > fathers_mean:
+            self.n_best_crossover_child += 1
+        elif crossover_population[2].fitness < fathers_mean:
+            self.n_worse_crossover_child += 1
+
+        if crossover_population[3].fitness > fathers_mean:
+            self.n_best_crossover_child += 1
+        elif crossover_population[3].fitness < fathers_mean:
+            self.n_worse_crossover_child += 1
+
+    def get_crossover_best_and_worse(self):
+        print('Crossover child worse than father\'s mean:', self.n_worse_crossover_child)
+        print('Crossover child better than father\'s mean:', self.n_best_crossover_child)
+        
+    def set_repeated_individuals(self):
+        pass
+
+    def get_repeated_individuals(self):
+        print('Repeated individuals:', self.n_repeated_individuals)
