@@ -40,7 +40,7 @@ class Fitness:
         normalize = 0
         for index in range(testLen):
             try:
-                evalInd = self.evaluate_individual(treeRoot, index)
+                evalInd = self.evaluate_individual(treeRoot, index, train=False)
 
                 sumOfSquares += (self.test.loc[index, 'Y'] - evalInd) ** 2
             except:
@@ -51,6 +51,10 @@ class Fitness:
         testFitness = np.sqrt(sumOfSquares / normalize)
         return testFitness
 
-    def evaluate_individual(self, treeRoot, index):
-        X = self.train.iloc[index, :-1]
+    def evaluate_individual(self, treeRoot, index, train=True):
+        if train:
+            X = self.train.iloc[index, :-1]
+        else:
+            X = self.test.iloc[index, :-1]
+
         return eval(str(treeRoot.print_tree()))
