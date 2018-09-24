@@ -52,6 +52,6 @@ for generation in range(generations):
         population = tour.execute(population)
         population = fill_population(population, populationSize, fit, dataHolder.nVariables)
 
-    stats.get_train_statistics(population)
+    stats.get_train_statistics(population, dataHolder.train)
 
 stats.get_test_statistics(population)
