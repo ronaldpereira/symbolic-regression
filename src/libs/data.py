@@ -18,4 +18,4 @@ class Data:
             self.test.columns = header
 
         if not self.train.empty:
-            self.n_variables = len(self.train.iloc[0]) - 1
+            self.nVariables = len(self.train.iloc[0]) - 1

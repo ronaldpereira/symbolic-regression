@@ -9,27 +9,47 @@ import warnings
 warnings.filterwarnings('ignore')
 
 class Fitness:
-    def __init__(self, trainDF):
+    def __init__(self, trainDF, testDF):
         self.train = trainDF.copy()
+        self.test = testDF.copy()
 
-    def calculate(self, treeRoot):
-        y_mean = self.train['Y'].mean()
+    def calculate_train(self, treeRoot):
+        yMean = self.train['Y'].mean()
         trainLen = len(self.train)
 
-        sum_of_squares = 0
+        sumOfSquares = 0
         normalize = 0
         for index in range(trainLen):
             try:
-                eval_ind = self.evaluate_individual(treeRoot, index)
+                evalInd = self.evaluate_individual(treeRoot, index)
 
-                sum_of_squares += (self.train.loc[index, 'Y'] - eval_ind) ** 2
+                sumOfSquares += (self.train.loc[index, 'Y'] - evalInd) ** 2
             except:
-                sum_of_squares = math.inf
+                sumOfSquares = math.inf
 
-            normalize += (self.train.loc[index, 'Y'] - y_mean) ** 2
+            normalize += (self.train.loc[index, 'Y'] - yMean) ** 2
 
-        fitness = np.sqrt(sum_of_squares / normalize)
-        return fitness
+        trainFitness = np.sqrt(sumOfSquares / normalize)
+        return trainFitness
+
+    def calculate_test(self, treeRoot):
+        yMean = self.test['Y'].mean()
+        testLen = len(self.test)
+
+        sumOfSquares = 0
+        normalize = 0
+        for index in range(testLen):
+            try:
+                evalInd = self.evaluate_individual(treeRoot, index)
+
+                sumOfSquares += (self.test.loc[index, 'Y'] - evalInd) ** 2
+            except:
+                sumOfSquares = math.inf
+
+            normalize += (self.test.loc[index, 'Y'] - yMean) ** 2
+
+        testFitness = np.sqrt(sumOfSquares / normalize)
+        return testFitness
 
     def evaluate_individual(self, treeRoot, index):
         X = self.train.iloc[index, :-1]

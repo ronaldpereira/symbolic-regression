@@ -4,9 +4,9 @@ import math
 import numpy as np
 
 class Tournament:
-    def __init__(self, k, random_seed=None):
-        if random_seed:
-            np.random.seed(random_seed)
+    def __init__(self, k, randomSeed=None):
+        if randomSeed:
+            np.random.seed(randomSeed)
 
         self.k = k
 
@@ -14,33 +14,32 @@ class Tournament:
         if self.k > len(population):
             self.k = len(population)
         
-        n_tournaments = math.ceil(len(population) / self.k)
-        tournament = self.split_population_into_tournaments(population, n_tournaments)
+        nTournaments = math.ceil(len(population) / self.k)
+        tournament = self.split_population_into_tournaments(population, nTournaments)
 
-        new_population = list(map(lambda x: get_best_individual(x), tournament))
+        newPopulation = list(map(lambda x: get_best_individual(x), tournament))
 
-        return new_population
+        return newPopulation
 
-    def split_population_into_tournaments(self, population, n_tour):
+    def split_population_into_tournaments(self, population, nTour):
         population = population.copy()
-        initial_population_len = len(population)
-        tournaments = [[] for _ in range(n_tour)]
+        initialPopulationLen = len(population)
+        tournaments = [[] for _ in range(nTour)]
 
-        for _ in range(initial_population_len):
-            tour_index = np.random.randint(n_tour)
+        for _ in range(initialPopulationLen):
+            tourIndex = np.random.randint(nTour)
 
-            if len(tournaments[tour_index]) >= self.k:
-                tour_index = 0
-                while len(tournaments[tour_index]) >= self.k:
-                    tour_index += 1
+            if len(tournaments[tourIndex]) >= self.k:
+                tourIndex = 0
+                while len(tournaments[tourIndex]) >= self.k:
+                    tourIndex += 1
 
-            pop_index = np.random.randint(len(population))
-            tournaments[tour_index].append(population[pop_index])
-            population.pop(pop_index)
+            popIndex = np.random.randint(len(population))
+            tournaments[tourIndex].append(population[popIndex])
+            population.pop(popIndex)
 
         return tournaments
 
 def get_best_individual(population):
-    best_ind = min(population, key=lambda x: x.fitness)
-    return best_ind
-
+    bestInd = min(population, key=lambda x: x.fitness)
+    return bestInd

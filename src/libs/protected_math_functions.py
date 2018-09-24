@@ -43,5 +43,3 @@ def div(x):
             return x
 
     return 0.00000000000000001
-
-

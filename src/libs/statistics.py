@@ -6,20 +6,24 @@ class Statistics:
         self.n_worse_crossover_child = 0
         self.n_repeated_individuals = 0
 
-    def get_statistics(self, population):
+    def get_train_statistics(self, population):
         self.population = population
-        self.best_individual()
-        self.worst_individual()
+        self.best_individual_fitness()
+        self.worst_individual_fitness()
         self.mean_fitness()
         self.get_crossover_best_and_worse()
+    
+    def get_test_statistics(self, population):
+        self.population = population
+        self.best_individual_test()
 
-    def best_individual(self):
+    def best_individual_fitness(self):
         best_ind = min(self.population, key=lambda x: x.fitness)
-        print('Best Individual Fitness', best_ind.fitness)
+        print('Best Individual Fitness:', best_ind.fitness)
 
-    def worst_individual(self):
+    def worst_individual_fitness(self):
         worst_ind = max(self.population, key=lambda x: x.fitness)
-        print('Worst Individual Fitness', worst_ind.fitness)
+        print('Worst Individual Fitness:', worst_ind.fitness)
 
     def mean_fitness(self):
         total_fitness = 0
@@ -48,3 +52,12 @@ class Statistics:
 
     def get_repeated_individuals(self):
         print('Repeated individuals:', self.n_repeated_individuals)
+
+    def best_individual_test(self):
+        print('\n***TEST STATISTICS***')
+        best_ind = min(self.population, key=lambda x: x.fitness)
+        print('Best Individual:')
+        print(best_ind.root.print_tree())
+        print('Best Individual Train Fitness:', best_ind.fitness)
+        best_ind.calculate_test_fitness()
+        print('Best Individual Test Fitness:', best_ind.test_fitness)

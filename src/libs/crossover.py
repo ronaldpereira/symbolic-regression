@@ -6,23 +6,23 @@ import libs.individual as individual
 import libs.statistics as statistics
 
 class Crossover:
-    def __init__(self, prob, number_of_variables, random_seed=None):
-        if random_seed:
-            np.random.seed(random_seed)
+    def __init__(self, prob, numberOfVariables, randomSeed=None):
+        if randomSeed:
+            np.random.seed(randomSeed)
 
-        self.number_of_variables = number_of_variables
+        self.numberOfVariables = numberOfVariables
         self.prob = prob
 
-    def cross_population(self, population, fit, stats):
-        n_possible_crossovers = math.floor(len(population) / 2)
-        for _ in range(n_possible_crossovers):
+    def cross_population(self, population, fitnessObject, stats):
+        nPossibleCrossovers = math.floor(len(population) / 2)
+        for _ in range(nPossibleCrossovers):
             if np.random.rand() <= self.prob:
                 index1 = np.random.randint(len(population))
                 index2 = np.random.randint(len(population))
                 crossover_tree1, crossover_tree2 = self.execute(population[index1].tree, population[index2].tree)
 
-                crossover_ind1 = individual.Individual(fit, self.number_of_variables, crossover_tree1)
-                crossover_ind2 = individual.Individual(fit, self.number_of_variables, crossover_tree2)
+                crossover_ind1 = individual.Individual(fitnessObject, self.numberOfVariables, crossover_tree1)
+                crossover_ind2 = individual.Individual(fitnessObject, self.numberOfVariables, crossover_tree2)
 
                 crossover_population = [population[index1], population[index2], crossover_ind1, crossover_ind2]
                 stats.set_crossover_best_and_worse(crossover_population)
@@ -36,26 +36,26 @@ class Crossover:
     def execute(self, crossover1, crossover2):
         # Tries to crossover 2 trees 50 times, if it fails, returns primitive fathers
         for _ in range(50):
-            subtree_root1 = crossover1.root.get_random_node()
-            subtree_root2 = crossover2.root.get_random_node()
-            subtree_father1, direction1 = crossover1.root.get_node_father(subtree_root1)
-            subtree_father2, direction2 = crossover2.root.get_node_father(subtree_root2)
+            subtreeRoot1 = crossover1.root.get_random_node()
+            subtreeRoot2 = crossover2.root.get_random_node()
+            subtreeRather1, direction1 = crossover1.root.get_node_father(subtreeRoot1)
+            subtreeRather2, direction2 = crossover2.root.get_node_father(subtreeRoot2)
 
-            if subtree_father1 and subtree_father2:
+            if subtreeRather1 and subtreeRather2:
                 if direction1 and direction2:
-                    subtree_father1.insert_subtree(subtree_root2, direction1)
-                    subtree_father2.insert_subtree(subtree_root1, direction2)
+                    subtreeRather1.insert_subtree(subtreeRoot2, direction1)
+                    subtreeRather2.insert_subtree(subtreeRoot1, direction2)
                 elif direction1:
-                    subtree_father1.insert_subtree(subtree_root2, direction1)
-                    crossover2.root = subtree_root1
+                    subtreeRather1.insert_subtree(subtreeRoot2, direction1)
+                    crossover2.root = subtreeRoot1
                 elif direction2:
-                    crossover1.root = subtree_root2
-                    subtree_father2.insert_subtree(subtree_root1, direction2)
+                    crossover1.root = subtreeRoot2
+                    subtreeRather2.insert_subtree(subtreeRoot1, direction2)
                 else:
-                    crossover1.root = subtree_root2
-                    crossover2.root = subtree_root1
+                    crossover1.root = subtreeRoot2
+                    crossover2.root = subtreeRoot1
 
-                if crossover1.root.get_subtree_height() <= crossover1.max_depth and crossover2.root.get_subtree_height() <= crossover2.max_depth:
+                if crossover1.root.get_subtree_height() <= crossover1.maxDepth and crossover2.root.get_subtree_height() <= crossover2.maxDepth:
                     break
         
         return crossover1, crossover2

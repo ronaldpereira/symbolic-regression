@@ -11,13 +11,13 @@ class Node:
         self.childNumber = 0
         self.data = None
 
-    def insert(self, data, n_child=0):
+    def insert(self, data, nChild=0):
         self.data = data
 
-        if n_child == 1:
+        if nChild == 1:
             self.childNumber = 1
             self.right = Node()
-        elif n_child == 2:
+        elif nChild == 2:
             self.childNumber = 2
             self.left = Node()
             self.right = Node()
@@ -28,25 +28,26 @@ class Node:
         elif direction == 'r':
             self.right = subtree
 
-    def get_tree(self):
+    def get_in_order_tree(self):
         print('(', end='')
         if self.left:
-            self.left.get_tree()
+            self.left.get_in_order_tree()
         if self.data:
             print(self.data, end='')
         if self.right:
-            self.right.get_tree()
+            self.right.get_in_order_tree()
         print(')', end='')
 
     def print_tree(self):
-        # It changes the stdout to be stored on the tree variable and then restore it to stdout
-        old_stdout = sys.stdout
+        # Changes the stdout to store the in-order tree print
+        oldStdout = sys.stdout
         tree = StringIO()
         sys.stdout = tree
 
-        self.get_tree()
+        self.get_in_order_tree()
 
-        sys.stdout = old_stdout
+        # Restores the stdout
+        sys.stdout = oldStdout
 
         return tree.getvalue()
 
@@ -116,14 +117,14 @@ class Node:
 
 
 class RandomTree:
-    def __init__(self, max_variables, random_seed=None, max_depth=7):
-        if random_seed:
-            np.random.seed(random_seed)
+    def __init__(self, maxVariables, randomSeed=None, maxDepth=7):
+        if randomSeed:
+            np.random.seed(randomSeed)
 
-        self.max_depth = max_depth
-        self.max_variables = max_variables
+        self.maxDepth = maxDepth
+        self.maxVariables = maxVariables
 
-        if max_depth > 0:
+        if maxDepth > 0:
             self.root = self.generate_node()
 
             if self.root.childNumber == 1:
@@ -137,7 +138,7 @@ class RandomTree:
 
     def generate_subtree(self, node, actualDepth=1):
         actualDepth += 1
-        node = self.generate_node(actualDepth >= self.max_depth)
+        node = self.generate_node(actualDepth >= self.maxDepth)
 
         if node.childNumber == 1:
             node.right = self.generate_subtree(node.right, actualDepth)
@@ -151,34 +152,34 @@ class RandomTree:
         node = Node()
 
         if not justTerminal:
-            data, n_child = self.random_function_call()
+            data, nChild = self.random_function_call()
         else:
-            data, n_child = self.get_terminal()
+            data, nChild = self.get_terminal()
 
-        node.insert(data, n_child)
+        node.insert(data, nChild)
         return node
 
     def random_function_call(self):
-        function_list = [self.get_binary_function, self.get_unary_function, self.get_terminal]
+        functionList = [self.get_binary_function, self.get_unary_function, self.get_terminal]
 
-        return function_list[np.random.randint(0, len(function_list))]()
+        return functionList[np.random.randint(0, len(functionList))]()
 
     def get_binary_function(self):
-        binary_function_list = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']
+        binaryFunctionList = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']
 
-        return binary_function_list[np.random.randint(0, len(binary_function_list))], 2
+        return binaryFunctionList[np.random.randint(0, len(binaryFunctionList))], 2
 
     def get_unary_function(self):
-        unary_function_list = ['prot_math.sqrt', 'math.sin', 'math.cos', 'prot_math.log', 'prot_math.log2', 'prot_math.log10']
+        unaryFunctionList = ['prot_math.sqrt', 'math.sin', 'math.cos', 'prot_math.log', 'prot_math.log2', 'prot_math.log10']
 
-        return unary_function_list[np.random.randint(0, len(unary_function_list))], 1
+        return unaryFunctionList[np.random.randint(0, len(unaryFunctionList))], 1
 
     def get_terminal(self):
         random = np.random.rand()
 
         if random < 0.5:
             # returns variable Xi terminal
-            return 'X[' + str(np.random.randint(0, self.max_variables)) + ']', 0
+            return 'X[' + str(np.random.randint(0, self.maxVariables)) + ']', 0
         else:
             # returns random constant
             return np.random.uniform(-100, 100), 0
