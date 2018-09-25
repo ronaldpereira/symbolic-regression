@@ -9,6 +9,6 @@ run:
 	python3 symbolic_regression.py $(POP) $(GEN) $(MUT) $(CROSS) $(K) $(TRAIN) $(TEST) $(SEED) $(ELIT)
 
 test:
-	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1> output/synth1.txt &
-	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1> output/synth2.txt &
+	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 > output/synth1.txt &
+	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1 > output/synth2.txt &
 	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 1 > output/concrete.txt &
