@@ -6,12 +6,13 @@ import libs.individual as individual
 import libs.statistics as statistics
 
 class Crossover:
-    def __init__(self, prob, numberOfVariables, randomSeed=None):
+    def __init__(self, prob, numberOfVariables, activateElitism, randomSeed=None):
         if randomSeed:
             np.random.seed(randomSeed)
 
         self.numberOfVariables = numberOfVariables
         self.prob = prob
+        self.activateElitism = activateElitism
 
     def cross_population(self, population, fitnessObject, stats):
         nPossibleCrossovers = math.floor(len(population) / 2)
@@ -26,10 +27,17 @@ class Crossover:
 
                 crossover_population = [population[index1], population[index2], crossover_ind1, crossover_ind2]
                 stats.set_crossover_best_and_worse(crossover_population)
-                crossover_population.sort(key=lambda x: x.fitness)
 
-                population[index1] = crossover_population[0]
-                population[index2] = crossover_population[1]
+                # If elitism is activated, then only the 2 best individuals will continue
+                if self.activateElitism:
+                    crossover_population.sort(key=lambda x: x.fitness)
+                    population[index1] = crossover_population[0]
+                    population[index2] = crossover_population[1]
+                # If elitism is deactivated, then the 2 child will replace it's fathers
+                else:
+                    population[index1] = crossover_ind1
+                    population[index2] = crossover_ind2
+
 
         return population
 

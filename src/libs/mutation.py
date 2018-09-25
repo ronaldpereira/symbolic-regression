@@ -5,12 +5,13 @@ import libs.tree as tree
 import libs.individual as individual
 
 class Mutation:
-    def __init__(self, prob, numberOfVariables, randomSeed=None):
+    def __init__(self, prob, numberOfVariables, activateElitism=True, randomSeed=None):
         if randomSeed:
             np.random.seed(randomSeed)
 
         self.numberOfVariables = numberOfVariables
         self.prob = prob
+        self.activateElitism = activateElitism
 
     def mutate_population(self, population, fit, ):
         for index in range(len(population)):
@@ -18,8 +19,14 @@ class Mutation:
                 mutatedTree = self.execute(population[index].tree)
                 mutated_ind = individual.Individual(fit, self.numberOfVariables, mutatedTree)
 
-                if mutated_ind.fitness < population[index].fitness:
+                # If elitism is activated, then the best individual will continue
+                if self.activateElitism:
+                    if mutated_ind.fitness < population[index].fitness:
+                        population[index] = mutated_ind
+                # If elitism is deactivated, then the child will always substitute his father
+                else:
                     population[index] = mutated_ind
+
 
         return population
 

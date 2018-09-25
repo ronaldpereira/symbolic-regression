@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import sys
 import libs.tree as tree
 import libs.data as data
 
