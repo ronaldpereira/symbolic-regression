@@ -117,11 +117,9 @@ class Node:
 
 
 class RandomTree:
-    def __init__(self, maxVariables, randomSeed=None, maxDepth=7):
-        if randomSeed:
-            np.random.seed(randomSeed)
-
+    def __init__(self, maxVariables, method, maxDepth=7):
         self.maxDepth = maxDepth
+        self.method = method
         self.maxVariables = maxVariables
 
         if maxDepth > 0:
@@ -160,9 +158,13 @@ class RandomTree:
         return node
 
     def random_function_call(self):
-        functionList = [self.get_binary_function, self.get_unary_function, self.get_terminal]
+        fullFunctionList = [self.get_binary_function, self.get_unary_function]
+        growFunctionList = [self.get_binary_function, self.get_unary_function, self.get_terminal]
 
-        return functionList[np.random.randint(0, len(functionList))]()
+        if self.method == 'full':
+            return fullFunctionList[np.random.randint(0, len(fullFunctionList))]()
+        elif self.method == 'grow':
+            return growFunctionList[np.random.randint(0, len(growFunctionList))]()
 
     def get_binary_function(self):
         binaryFunctionList = ['+', '-', '*', '/prot_math.div', '**prot_math.pow']

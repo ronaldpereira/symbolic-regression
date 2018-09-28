@@ -4,9 +4,9 @@ import libs.tree as tree
 import libs.data as data
 
 class Individual:
-    def __init__(self, fitnessObject, numberOfVariables, tree=None, randomSeed=None):
+    def __init__(self, fitnessObject, numberOfVariables, tree=None, method='grow'):
         if not tree:
-            self.tree = self.generate_random_tree(numberOfVariables, randomSeed)
+            self.tree = self.generate_random_tree(numberOfVariables, method)
         else:
             self.tree = tree
 
@@ -14,8 +14,8 @@ class Individual:
         self.fitnessObject = fitnessObject
         self.fitness = self.calculate_train_fitness()
 
-    def generate_random_tree(self, numberOfVariables, randomSeed=None, treeMaxDepth=7):
-        return tree.RandomTree(numberOfVariables, randomSeed, treeMaxDepth)
+    def generate_random_tree(self, numberOfVariables, method, treeMaxDepth=7):
+        return tree.RandomTree(numberOfVariables, method, treeMaxDepth)
 
     def calculate_train_fitness(self):
         return self.fitnessObject.calculate_train(self.root)

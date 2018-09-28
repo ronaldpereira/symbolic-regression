@@ -7,10 +7,7 @@ import libs.individual as individual
 import libs.tree as tree
 
 class Operands:
-    def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject, randomSeed=None):
-        if randomSeed:
-            np.random.seed(randomSeed)
-
+    def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject):
         self.population = population
         self.desiredPopulationSize = desiredPopulationSize
         self.mutationProb = mutationProb
@@ -67,7 +64,7 @@ class Mutation:
         for _ in range(50):
             subtree_root = mutationTree.root.get_random_node()
             subtree_father, direction = mutationTree.root.get_node_father(subtree_root)
-            new_random_subtree = tree.RandomTree(mutationTree.maxVariables, maxDepth=mutationTree.root.get_subtree_height())
+            new_random_subtree = tree.RandomTree(mutationTree.maxVariables, method='grow', maxDepth=mutationTree.root.get_subtree_height())
 
             if subtree_father:
                 if direction:
@@ -101,6 +98,7 @@ class Crossover:
         for _ in range(50):
             subtreeRoot1 = crossover1.root.get_random_node()
             subtreeRoot2 = crossover2.root.get_random_node()
+
             subtreeFather1, direction1 = crossover1.root.get_node_father(subtreeRoot1)
             subtreeFather2, direction2 = crossover2.root.get_node_father(subtreeRoot2)
 

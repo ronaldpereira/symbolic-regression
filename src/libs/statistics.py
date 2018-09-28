@@ -39,14 +39,15 @@ class Statistics:
 
     def set_crossover_best_and_worse(self, crossover_population):
         fathers_mean = (crossover_population[0].fitness + crossover_population[1].fitness) / 2
-        if round(crossover_population[2].fitness, 4) > round(fathers_mean, 4):
+
+        if crossover_population[2].fitness < fathers_mean:
             self.n_best_crossover_child += 1
-        elif round(crossover_population[2].fitness, 4) < round(fathers_mean, 4):
+        elif crossover_population[2].fitness > fathers_mean:
             self.n_worse_crossover_child += 1
 
-        if round(crossover_population[3].fitness, 4) > round(fathers_mean, 4):
+        if crossover_population[3].fitness < fathers_mean:
             self.n_best_crossover_child += 1
-        elif round(crossover_population[3].fitness, 4) < round(fathers_mean, 4):
+        elif crossover_population[3].fitness > fathers_mean:
             self.n_worse_crossover_child += 1
 
     def get_crossover_best_and_worse(self):
@@ -54,12 +55,16 @@ class Statistics:
         print('Crossover child better than father\'s mean:', self.n_best_crossover_child)
         
     def set_repeated_individuals(self):
-        for index1, ind1 in enumerate(self.population):
-            self.population.pop(index1)
-            for index2, ind2 in enumerate(self.population):
-                if index1 < index2:
-                    if ind1.root.print_tree() == ind2.root.print_tree():
-                        self.population.pop(index2)
+        counted = [0]*len(self.population)
+        for index1 in range(len(self.population)):
+            for index2 in range(index1+1, len(self.population)):
+                if self.population[index1].root.print_tree() == self.population[index2].root.print_tree():
+                    if counted[index1] == 0 and counted[index2] == 0:
+                        counted[index1] = 1
+                        counted[index2] = 1
+                        self.n_repeated_individuals += 2
+                    elif counted[index2] == 0:
+                        counted[index2] = 1
                         self.n_repeated_individuals += 1
 
     def get_repeated_individuals(self):

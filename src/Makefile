@@ -8,8 +8,11 @@ help:
 run:
 	python3 symbolic_regression.py $(POP) $(GEN) $(MUT) $(CROSS) $(K) $(TRAIN) $(TEST) $(SEED) $(ELIT)
 
-test:
-	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1
+test_no_seed:
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1
+
+test_seed:
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1
 
 execute_tests:
 	python3 symbolic_regression.py 50 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 > output/synth1.txt &

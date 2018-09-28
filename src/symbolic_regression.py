@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 import sys
+import copy
+import numpy as np
 import libs.data as data
 import libs.tree as tree
 import libs.fitness as fitness
@@ -26,6 +28,8 @@ except:
 dataHolder = data.Data(trainCSVPath, testCSVPath)
 fit = fitness.Fitness(dataHolder.train, dataHolder.test)
 tour = selection.Tournament(kTournament)
+if activateRandomSeed:
+    np.random.seed(123)
 
 for generation in range(generations):
     print('\n***Generation:', generation+1, '***')
@@ -34,20 +38,22 @@ for generation in range(generations):
     if generation == 0:
         population = []
         for index in range(0, populationSize):
-            population.append(individual.Individual(fit, dataHolder.nVariables, randomSeed=index if activateRandomSeed else None))
+            if index < populationSize/2:
+                population.append(individual.Individual(fit, dataHolder.nVariables, method='grow'))
+            else:
+                population.append(individual.Individual(fit, dataHolder.nVariables, method='full'))
 
-    else:
-        newPopulation = []
+    stats.get_train_statistics(copy.deepcopy(population), dataHolder.train)
 
-        if activateElitism:
-            newPopulation.append(selection.get_best_individual(population))
+    newPopulation = []
 
-        newPopulation.extend(tour.execute(population))
+    if activateElitism:
+        newPopulation.append(selection.get_best_individual(population))
 
-        ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, randomSeed=index if activateRandomSeed else None)
+    newPopulation.extend(tour.execute(population))
 
-        population = ops.execute()
+    ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats)
 
-    stats.get_train_statistics(population, dataHolder.train)
+    population = ops.execute()
 
 stats.get_test_statistics(population)
