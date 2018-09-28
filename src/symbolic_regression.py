@@ -10,6 +10,7 @@ import libs.statistics as statistics
 import libs.operands as operands
 import libs.selection as selection
 import libs.individual as individual
+import libs.best_individual as best_individual
 
 try:
     populationSize = int(sys.argv[1])
@@ -29,8 +30,10 @@ except:
 dataHolder = data.Data(trainCSVPath, testCSVPath)
 fit = fitness.Fitness(dataHolder.train, dataHolder.test)
 tour = selection.Tournament(kTournament)
+bestInd = best_individual.BestIndividual()
+
 if activateRandomSeed:
-    np.random.seed(123)
+    np.random.seed(20182)
 
 for generation in range(generations):
     print('\n***Generation:', generation+1, '***')
@@ -47,6 +50,8 @@ for generation in range(generations):
 
     stats.get_train_statistics(copy.deepcopy(population), dataHolder.train)
 
+    bestInd.check_best_individual(min(population, key=lambda x: x.fitness))
+
     # Only do selection and operators if isn't the last generation
     if generation < generations - 1:
         newPopulation = []
@@ -60,4 +65,5 @@ for generation in range(generations):
 
         population = ops.execute()
 
-stats.get_test_statistics(population)
+# Gets the test statistics for the best individual amongst all generations
+stats.get_test_statistics(bestInd.individual)

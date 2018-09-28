@@ -21,8 +21,8 @@ class Statistics:
         self.get_crossover_best_and_worse()
         self.get_repeated_individuals()
     
-    def get_test_statistics(self, population):
-        self.population = population
+    def get_test_statistics(self, bestIndividual):
+        self.bestIndividual = bestIndividual
         self.best_individual_test()
 
     def best_individual(self):
@@ -58,20 +58,6 @@ class Statistics:
         print('Crossover child better than fathers\' mean:', self.n_best_crossover_child)
         
     def set_repeated_individuals(self):
-        '''
-        counted = [0]*len(self.population)
-        for index1 in range(len(self.population)):
-            for index2 in range(index1+1, len(self.population)):
-                if self.population[index1].root.print_tree() == self.population[index2].root.print_tree():
-                    if counted[index1] == 0 and counted[index2] == 0:
-                        counted[index1] = 1
-                        counted[index2] = 1
-                        self.n_repeated_individuals += 2
-                    elif counted[index2] == 0:
-                        counted[index2] = 1
-                        self.n_repeated_individuals += 1
-        '''
-
         uniqueTrees = []
         for index in range(len(self.population)):
             if self.population[index].root.print_tree() not in uniqueTrees:
@@ -87,9 +73,7 @@ class Statistics:
 
     def best_individual_test(self):
         print('\n***TEST STATISTICS***')
-        best_ind = min(self.population, key=lambda x: x.fitness)
-        print('Best Individual:')
-        print(best_ind.root.print_tree())
-        print('Best Individual Train Fitness:', best_ind.fitness)
-        best_ind.calculate_test_fitness()
-        print('Best Individual Test Fitness:', best_ind.test_fitness)
+        print('Best Individual:', self.bestIndividual.root.print_tree())
+        print('Best Individual Train Fitness:', self.bestIndividual.fitness)
+        self.bestIndividual.calculate_test_fitness()
+        print('Best Individual Test Fitness:', self.bestIndividual.test_fitness)
