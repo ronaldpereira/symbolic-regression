@@ -1,0 +1,207 @@
+Test Concrete: POP=500 GEN=20 MUT=0.05 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1
+
+***Generation: 1 ***
+Best Individual: ((74.62380403439553)+(prot_math.log(prot_math.log(X[6]))))
+Best Individual Fitness: 1.0002211352397012
+Worst Individual Fitness: inf
+Mean Fitness: inf
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 28
+Unique individuals: 472
+
+***Generation: 2 ***
+Best Individual: (15.699263738664541)
+Best Individual Fitness: 1.5607468435742557
+Worst Individual Fitness: 4.5730550136170285
+Mean Fitness: 4.338178806166672
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 492
+Unique individuals: 8
+
+***Generation: 3 ***
+Best Individual: (prot_math.log(14.541049647487725))
+Best Individual Fitness: 2.212258584797405
+Worst Individual Fitness: 4.5730550136170285
+Mean Fitness: 4.489715920727189
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 491
+Unique individuals: 9
+
+***Generation: 4 ***
+Best Individual: (prot_math.sqrt(-72.57082908427721))
+Best Individual Fitness: 2.355477757441971
+Worst Individual Fitness: 4.5730550136170285
+Mean Fitness: 4.544522404813892
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 494
+Unique individuals: 6
+
+***Generation: 5 ***
+Best Individual: (33.44111657989174)
+Best Individual Fitness: 1.0100837854137525
+Worst Individual Fitness: 4.5730550136170285
+Mean Fitness: 4.226382439304505
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 490
+Unique individuals: 10
+
+***Generation: 6 ***
+Best Individual: ((X[4])-(-16.973404818385674))
+Best Individual Fitness: 1.1941436348853525
+Worst Individual Fitness: 4.5730550136170285
+Mean Fitness: 4.4826933376133855
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 495
+Unique individuals: 5
+
+***Generation: 7 ***
+Best Individual: (X[4])
+Best Individual Fitness: 1.9929457949293514
+Worst Individual Fitness: 1.9929457949293514
+Mean Fitness: 1.9929457949293634
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 8 ***
+Best Individual: (39.30643784717361)
+Best Individual Fitness: 1.0211417110949526
+Worst Individual Fitness: 1.9929457949293514
+Mean Fitness: 1.9815339401342422
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 497
+Unique individuals: 3
+
+***Generation: 9 ***
+Best Individual: (59.48826952445046)
+Best Individual Fitness: 1.726871500327022
+Worst Individual Fitness: 1.9929457949293514
+Mean Fitness: 1.992413646340159
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 498
+Unique individuals: 2
+
+***Generation: 10 ***
+Best Individual: (18.421873732510193)
+Best Individual Fitness: 1.44008369589398
+Worst Individual Fitness: 1.9929457949293514
+Mean Fitness: 1.754660808153981
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 496
+Unique individuals: 4
+
+***Generation: 11 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.7536935624791399
+Mean Fitness: 1.3101750656205688
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 496
+Unique individuals: 4
+
+***Generation: 12 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 13 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 14 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 15 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 16 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 17 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 18 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 19 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***Generation: 20 ***
+Best Individual: (35.69254311903967)
+Best Individual Fitness: 1.0000350536379514
+Worst Individual Fitness: 1.0000350536379514
+Mean Fitness: 1.0000350536379436
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 499
+Unique individuals: 1
+
+***TEST STATISTICS***
+Best Individual:
+(35.69254311903967)
+Best Individual Train Fitness: 1.0000350536379514
+Best Individual Test Fitness: 1.0000078185792385
