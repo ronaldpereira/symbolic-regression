@@ -39,14 +39,14 @@ class Statistics:
 
     def set_crossover_best_and_worse(self, crossover_population):
         fathers_mean = (crossover_population[0].fitness + crossover_population[1].fitness) / 2
-        if crossover_population[2].fitness > fathers_mean:
+        if round(crossover_population[2].fitness, 4) > round(fathers_mean, 4):
             self.n_best_crossover_child += 1
-        elif crossover_population[2].fitness < fathers_mean:
+        elif round(crossover_population[2].fitness, 4) < round(fathers_mean, 4):
             self.n_worse_crossover_child += 1
 
-        if crossover_population[3].fitness > fathers_mean:
+        if round(crossover_population[3].fitness, 4) > round(fathers_mean, 4):
             self.n_best_crossover_child += 1
-        elif crossover_population[3].fitness < fathers_mean:
+        elif round(crossover_population[3].fitness, 4) < round(fathers_mean, 4):
             self.n_worse_crossover_child += 1
 
     def get_crossover_best_and_worse(self):

@@ -42,7 +42,7 @@ class Node:
         # Changes the stdout to store the in-order tree print
         oldStdout = sys.stdout
         tree = StringIO()
-        sys.stdout = sys.stdout
+        sys.stdout = tree
 
         self.get_in_order_tree()
 

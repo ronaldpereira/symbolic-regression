@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import math
+import copy
 import numpy as np
 import libs.individual as individual
 import libs.tree as tree
-import copy
 
 class Operands:
     def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject, randomSeed=None):
@@ -55,7 +55,7 @@ class Mutation:
     def mutate_individual(ind, fitnessObject, nVariables):
         father = copy.deepcopy(ind)
 
-        mutatedTree = Mutation.execute(ind.tree)
+        mutatedTree = Mutation.execute(copy.deepcopy(ind.tree))
         mutatedInd = individual.Individual(fitnessObject, nVariables, mutatedTree)
 
         # Returns only the individual with the best fitness
@@ -85,7 +85,7 @@ class Crossover:
         father1 = copy.deepcopy(ind1)
         father2 = copy.deepcopy(ind2)
 
-        crossover_tree1, crossover_tree2 = Crossover.execute(ind1.tree, ind2.tree)
+        crossover_tree1, crossover_tree2 = Crossover.execute(copy.deepcopy(ind1.tree), copy.deepcopy(ind2.tree))
         crossover_ind1 = individual.Individual(fitnessObject, nVariables, crossover_tree1)
         crossover_ind2 = individual.Individual(fitnessObject, nVariables, crossover_tree2)
 

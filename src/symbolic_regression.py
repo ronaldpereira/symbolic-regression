@@ -50,5 +50,4 @@ for generation in range(generations):
 
     stats.get_train_statistics(population, dataHolder.train)
 
-
 stats.get_test_statistics(population)
