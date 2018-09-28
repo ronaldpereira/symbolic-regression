@@ -54,21 +54,13 @@ class Statistics:
         print('Crossover child better than father\'s mean:', self.n_best_crossover_child)
         
     def set_repeated_individuals(self):
-        results = [[] for _ in range(len(self.population))]
-        for popIndex, individual in enumerate(self.population):
-            for trainIndex in range(len(self.train)):
-                X = self.train.iloc[trainIndex, :-1]
-                try:
-                    results[popIndex].append(eval(str(individual.root.print_tree())))
-                except:
-                    results[popIndex].append(math.inf)
-
-        for index1, result1 in enumerate(results):
-            results.pop(index1)
-            for index2, result2 in enumerate(results):
-                if result1 == result2 and index1 < index2:
-                    results.pop(index2)
-                    self.n_repeated_individuals += 1
+        for index1, ind1 in enumerate(self.population):
+            self.population.pop(index1)
+            for index2, ind2 in enumerate(self.population):
+                if index1 < index2:
+                    if ind1.root.print_tree() == ind2.root.print_tree():
+                        self.population.pop(index2)
+                        self.n_repeated_individuals += 1
 
     def get_repeated_individuals(self):
         self.set_repeated_individuals()

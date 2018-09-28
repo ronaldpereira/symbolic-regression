@@ -11,35 +11,28 @@ class Tournament:
         self.k = k
 
     def execute(self, population):
-        if self.k > len(population):
-            self.k = len(population)
-        
-        nTournaments = math.ceil(len(population) / self.k)
-        tournament = self.split_population_into_tournaments(population, nTournaments)
+        newPopulation = []
+        # Select only two individuals from the population via tournament
+        for _ in range(2):
+            if self.k > len(population):
+                self.k = len(population)
 
-        newPopulation = list(map(lambda x: get_best_individual(x), tournament))
+            tournamentWinner = self.tournament(population)
+
+            # Remove the current tournament winner from population
+            population.remove(tournamentWinner)
+            # Add the current tournament winner to the new population
+            newPopulation.append(tournamentWinner)
 
         return newPopulation
 
-    def split_population_into_tournaments(self, population, nTour):
-        population = population.copy()
-        initialPopulationLen = len(population)
-        tournaments = [[] for _ in range(nTour)]
+    def tournament(self, population):
+        tournament = []
+        for _ in range(self.k):
+            tournament.append(population[np.random.randint(len(population))])
 
-        for _ in range(initialPopulationLen):
-            tourIndex = np.random.randint(nTour)
+        return get_best_individual(tournament)
 
-            if len(tournaments[tourIndex]) >= self.k:
-                tourIndex = 0
-                while len(tournaments[tourIndex]) >= self.k:
-                    tourIndex += 1
-
-            popIndex = np.random.randint(len(population))
-            tournaments[tourIndex].append(population[popIndex])
-            population.pop(popIndex)
-
-        return tournaments
 
 def get_best_individual(population):
-    bestInd = min(population, key=lambda x: x.fitness)
-    return bestInd
+    return min(population, key=lambda x: x.fitness)

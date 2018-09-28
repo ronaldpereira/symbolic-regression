@@ -5,19 +5,9 @@ import libs.data as data
 import libs.tree as tree
 import libs.fitness as fitness
 import libs.statistics as statistics
-import libs.mutation as mutation
-import libs.crossover as crossover
+import libs.operands as operands
 import libs.selection as selection
 import libs.individual as individual
-
-def fill_population(population, desiredPopulationSize, fit, numberOfVariables):
-    pop = population.copy()
-    popSize = len(pop)
-
-    for _ in range(desiredPopulationSize - popSize):
-        pop.append(individual.Individual(fit, numberOfVariables))
-
-    return pop
 
 try:
     populationSize = int(sys.argv[1])
@@ -47,15 +37,18 @@ for generation in range(generations):
             population.append(individual.Individual(fit, dataHolder.nVariables, randomSeed=index if activateRandomSeed else None))
 
     else:
-        mut = mutation.Mutation(mutationProb, dataHolder.nVariables, activateElitism, randomSeed=generation if activateRandomSeed else None)
-        population = mut.mutate_population(population, fit)
+        newPopulation = []
 
-        cross = crossover.Crossover(crossoverProb, dataHolder.nVariables, activateElitism, randomSeed=generation if activateRandomSeed else None)
-        population = cross.cross_population(population, fit, stats)
+        if activateElitism:
+            newPopulation.append(selection.get_best_individual(population))
 
-        population = tour.execute(population)
-        population = fill_population(population, populationSize, fit, dataHolder.nVariables)
+        newPopulation.extend(tour.execute(population))
+
+        ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, randomSeed=index if activateRandomSeed else None)
+
+        population = ops.execute()
 
     stats.get_train_statistics(population, dataHolder.train)
+
 
 stats.get_test_statistics(population)
