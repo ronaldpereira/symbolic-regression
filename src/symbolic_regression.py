@@ -35,6 +35,7 @@ if activateRandomSeed:
 for generation in range(generations):
     print('\n***Generation:', generation+1, '***')
     stats = statistics.Statistics()
+    
     # If it's the first generation, generate the initial population
     if generation == 0:
         population = []
@@ -46,15 +47,17 @@ for generation in range(generations):
 
     stats.get_train_statistics(copy.deepcopy(population), dataHolder.train)
 
-    newPopulation = []
+    # Only do selection and operators if isn't the last generation
+    if generation < generations - 1:
+        newPopulation = []
 
-    if activateElitism:
-        newPopulation.append(selection.get_best_individual(population))
+        if activateElitism:
+            newPopulation.append(selection.get_best_individual(population))
 
-    newPopulation.extend(tour.execute(population))
+        newPopulation.extend(tour.execute(population))
 
-    ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, activateElitistOperators)
+        ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, activateElitistOperators)
 
-    population = ops.execute()
+        population = ops.execute()
 
 stats.get_test_statistics(population)
