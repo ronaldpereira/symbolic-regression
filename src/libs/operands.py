@@ -4,6 +4,7 @@ import math
 import numpy as np
 import libs.individual as individual
 import libs.tree as tree
+import copy
 
 class Operands:
     def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject, randomSeed=None):
@@ -38,21 +39,21 @@ class Operands:
 
                 # If the random number [0, 1) is in the crossover probability (mutation + crossover probabilities), then do it on 2 random individuals from population
                 elif random < self.mutationProb + self.crossoverProb:
-                    ind1 = self.population[np.random.randint(len(self.population))]
-                    ind2 = self.population[np.random.randint(len(self.population))]
+                    ind1 = copy.copy(self.population[np.random.randint(len(self.population))])
+                    ind2 = copy.copy(self.population[np.random.randint(len(self.population))])
                     self.population.extend(Crossover.crossover_individuals(ind1, ind2, self.fitnessObject, self.nVariables, self.statisticsObject))
                 
                 # If the random number [0,1) isn't in the mutation nor the crossover probability, then just reproduce the individual into new population
                 else:
-                    ind = self.population[np.random.randint(len(self.population))]
+                    ind = copy.deepcopy(self.population[np.random.randint(len(self.population))])
                     self.population.append(ind)
-        print(list(map(lambda x: x.root.print_tree(), self.population)))
+
         return self.population
 
 class Mutation:
     @staticmethod
     def mutate_individual(ind, fitnessObject, nVariables):
-        father = ind
+        father = copy.deepcopy(ind)
 
         mutatedTree = Mutation.execute(ind.tree)
         mutatedInd = individual.Individual(fitnessObject, nVariables, mutatedTree)
@@ -66,13 +67,13 @@ class Mutation:
         for _ in range(50):
             subtree_root = mutationTree.root.get_random_node()
             subtree_father, direction = mutationTree.root.get_node_father(subtree_root)
-            new_randon_subtree = tree.RandomTree(mutationTree.maxVariables, maxDepth=mutationTree.root.get_subtree_height())
+            new_random_subtree = tree.RandomTree(mutationTree.maxVariables, maxDepth=mutationTree.root.get_subtree_height())
 
             if subtree_father:
                 if direction:
-                    subtree_father.insert_subtree(new_randon_subtree.root, direction)
+                    subtree_father.insert_subtree(new_random_subtree.root, direction)
                 else:
-                    mutationTree = new_randon_subtree
+                    mutationTree = new_random_subtree
                 if mutationTree.root.get_subtree_height() <= mutationTree.maxDepth:
                     break
 
@@ -81,8 +82,8 @@ class Mutation:
 class Crossover:
     @staticmethod
     def crossover_individuals(ind1, ind2, fitnessObject, nVariables, stats):
-        father1 = ind1
-        father2 = ind2
+        father1 = copy.deepcopy(ind1)
+        father2 = copy.deepcopy(ind2)
 
         crossover_tree1, crossover_tree2 = Crossover.execute(ind1.tree, ind2.tree)
         crossover_ind1 = individual.Individual(fitnessObject, nVariables, crossover_tree1)
@@ -100,19 +101,19 @@ class Crossover:
         for _ in range(50):
             subtreeRoot1 = crossover1.root.get_random_node()
             subtreeRoot2 = crossover2.root.get_random_node()
-            subtreeRather1, direction1 = crossover1.root.get_node_father(subtreeRoot1)
-            subtreeRather2, direction2 = crossover2.root.get_node_father(subtreeRoot2)
+            subtreeFather1, direction1 = crossover1.root.get_node_father(subtreeRoot1)
+            subtreeFather2, direction2 = crossover2.root.get_node_father(subtreeRoot2)
 
-            if subtreeRather1 and subtreeRather2:
+            if subtreeFather1 and subtreeFather2:
                 if direction1 and direction2:
-                    subtreeRather1.insert_subtree(subtreeRoot2, direction1)
-                    subtreeRather2.insert_subtree(subtreeRoot1, direction2)
+                    subtreeFather1.insert_subtree(subtreeRoot2, direction1)
+                    subtreeFather2.insert_subtree(subtreeRoot1, direction2)
                 elif direction1:
-                    subtreeRather1.insert_subtree(subtreeRoot2, direction1)
+                    subtreeFather1.insert_subtree(subtreeRoot2, direction1)
                     crossover2.root = subtreeRoot1
                 elif direction2:
                     crossover1.root = subtreeRoot2
-                    subtreeRather2.insert_subtree(subtreeRoot1, direction2)
+                    subtreeFather2.insert_subtree(subtreeRoot1, direction2)
                 else:
                     crossover1.root = subtreeRoot2
                     crossover2.root = subtreeRoot1
