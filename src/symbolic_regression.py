@@ -21,6 +21,7 @@ try:
     testCSVPath = str(sys.argv[7])
     activateRandomSeed = bool(int(sys.argv[8]))
     activateElitism = bool(int(sys.argv[9]))
+    activateElitistOperators = bool(int(sys.argv[10]))
 except:
     print('You are missing one or more parameters. Execute make help to print the help menu.')
     sys.exit(1)
@@ -52,7 +53,7 @@ for generation in range(generations):
 
     newPopulation.extend(tour.execute(population))
 
-    ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats)
+    ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, activateElitistOperators)
 
     population = ops.execute()
 

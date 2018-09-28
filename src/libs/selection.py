@@ -15,8 +15,6 @@ class Tournament:
 
         tournamentWinner = self.tournament(population)
 
-        # Remove the current tournament winner from population
-        population.remove(tournamentWinner)
         # Add the current tournament winner to the new population
         newPopulation.append(tournamentWinner)
 

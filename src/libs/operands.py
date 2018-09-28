@@ -7,7 +7,7 @@ import libs.individual as individual
 import libs.tree as tree
 
 class Operands:
-    def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject):
+    def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject, activateElitistOperators):
         self.population = population
         self.desiredPopulationSize = desiredPopulationSize
         self.mutationProb = mutationProb
@@ -16,6 +16,7 @@ class Operands:
         self.nVariables = nVariables
         self.fitnessObject = fitnessObject
         self.statisticsObject = statisticsObject
+        self.activateElitistOperators = activateElitistOperators
 
     def execute(self):
         while True:
@@ -32,13 +33,13 @@ class Operands:
                 # If the random number [0,1) is under the mutation probability, then do mutation on a random individual from population
                 if random < self.mutationProb:
                     ind = self.population[np.random.randint(len(self.population))]
-                    self.population.append(Mutation.mutate_individual(ind, self.fitnessObject, self.nVariables))
+                    self.population.append(Mutation.mutate_individual(ind, self.fitnessObject, self.nVariables, self.activateElitistOperators))
 
                 # If the random number [0, 1) is in the crossover probability (mutation + crossover probabilities), then do it on 2 random individuals from population
                 elif random < self.mutationProb + self.crossoverProb:
                     ind1 = copy.copy(self.population[np.random.randint(len(self.population))])
                     ind2 = copy.copy(self.population[np.random.randint(len(self.population))])
-                    self.population.extend(Crossover.crossover_individuals(ind1, ind2, self.fitnessObject, self.nVariables, self.statisticsObject))
+                    self.population.extend(Crossover.crossover_individuals(ind1, ind2, self.fitnessObject, self.nVariables, self.statisticsObject, self.activateElitistOperators))
                 
                 # If the random number [0,1) isn't in the mutation nor the crossover probability, then just reproduce the individual into new population
                 else:
@@ -49,14 +50,17 @@ class Operands:
 
 class Mutation:
     @staticmethod
-    def mutate_individual(ind, fitnessObject, nVariables):
+    def mutate_individual(ind, fitnessObject, nVariables, elit):
         father = copy.deepcopy(ind)
 
         mutatedTree = Mutation.execute(copy.deepcopy(ind.tree))
         mutatedInd = individual.Individual(fitnessObject, nVariables, mutatedTree)
 
         # Returns only the individual with the best fitness
-        return min([father, mutatedInd], key=lambda x: x.fitness)
+        if elit:
+            return min([father, mutatedInd], key=lambda x: x.fitness)
+        else:
+            return mutatedInd
 
     @staticmethod
     def execute(mutationTree):
@@ -78,7 +82,7 @@ class Mutation:
 
 class Crossover:
     @staticmethod
-    def crossover_individuals(ind1, ind2, fitnessObject, nVariables, stats):
+    def crossover_individuals(ind1, ind2, fitnessObject, nVariables, stats, elit):
         father1 = copy.deepcopy(ind1)
         father2 = copy.deepcopy(ind2)
 
@@ -88,9 +92,12 @@ class Crossover:
 
         crossover_population = [father1, father2, crossover_ind1, crossover_ind2]
         stats.set_crossover_best_and_worse(crossover_population)
-        crossover_population.sort(key=lambda x: x.fitness)
 
-        return [crossover_population[0], crossover_population[1]]
+        if elit:
+            crossover_population.sort(key=lambda x: x.fitness)
+            return [crossover_population[0], crossover_population[1]]
+        else:
+            return [crossover_ind1, crossover_ind2]
 
     @staticmethod
     def execute(crossover1, crossover2):

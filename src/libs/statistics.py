@@ -2,18 +2,20 @@
 
 import math
 from collections import Counter
+import copy
 
 class Statistics:
     def __init__(self):
         self.n_best_crossover_child = 0
         self.n_worse_crossover_child = 0
         self.n_repeated_individuals = 0
+        self.unique_individuals = 0
 
     def get_train_statistics(self, population, train):
         self.population = population
         self.train = train
 
-        self.best_individual_fitness()
+        self.best_individual()
         self.worst_individual_fitness()
         self.mean_fitness()
         self.get_crossover_best_and_worse()
@@ -23,8 +25,9 @@ class Statistics:
         self.population = population
         self.best_individual_test()
 
-    def best_individual_fitness(self):
+    def best_individual(self):
         best_ind = min(self.population, key=lambda x: x.fitness)
+        print('Best Individual:', best_ind.root.print_tree())
         print('Best Individual Fitness:', best_ind.fitness)
 
     def worst_individual_fitness(self):
@@ -51,10 +54,11 @@ class Statistics:
             self.n_worse_crossover_child += 1
 
     def get_crossover_best_and_worse(self):
-        print('Crossover child worse than father\'s mean:', self.n_worse_crossover_child)
-        print('Crossover child better than father\'s mean:', self.n_best_crossover_child)
+        print('Crossover child worse than fathers\' mean:', self.n_worse_crossover_child)
+        print('Crossover child better than fathers\' mean:', self.n_best_crossover_child)
         
     def set_repeated_individuals(self):
+        '''
         counted = [0]*len(self.population)
         for index1 in range(len(self.population)):
             for index2 in range(index1+1, len(self.population)):
@@ -66,10 +70,20 @@ class Statistics:
                     elif counted[index2] == 0:
                         counted[index2] = 1
                         self.n_repeated_individuals += 1
+        '''
+
+        uniqueTrees = []
+        for index in range(len(self.population)):
+            if self.population[index].root.print_tree() not in uniqueTrees:
+                uniqueTrees.append(self.population[index].root.print_tree())
+
+        self.unique_individuals = len(uniqueTrees)
+        self.n_repeated_individuals = len(self.population) - self.unique_individuals
 
     def get_repeated_individuals(self):
         self.set_repeated_individuals()
         print('Repeated individuals:', self.n_repeated_individuals)
+        print('Unique individuals:', self.unique_individuals)
 
     def best_individual_test(self):
         print('\n***TEST STATISTICS***')
