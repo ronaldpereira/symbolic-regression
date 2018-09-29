@@ -3,7 +3,7 @@ help:
 	@echo 'To execute the script, run the following:'
 	@echo 'make POP=<POPULATION_SIZE> GEN=<NUMBER_OF_GENERATIONS> MUT=<PROBABILITY_OF_MUTATION> CROSS=<PROBABILITY_OF_CROSSOVER> K=<TOURNAMENT_SIZE> TRAIN=<TRAIN_DATA_PATH> SEED=<ACTIVATE_RANDOM_SEED> ELIT=<ACTIVATE_ELITISM> ELITOPS=<ACTIVATE_ELITIST_OPERATORS>'
 	@echo 'For example:'
-	@echo 'make run POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 TRAIN=./input/datasets/synth1/synth1-train.csv TEST=./input/datasets/synth1/synth1-test.csv SEED=1 ELIT=1 ELITOPS=1'
+	@echo 'make run POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 TRAIN=./input/datasets/synth1/synth1-train.csv TEST=./input/datasets/synth1/synth1-test.csv SEED=0 ELIT=1 ELITOPS=1'
 	@echo 'To execute the tests, run the following:'
 	@echo 'chmod +x tests.sh && ./tests.sh'
 
@@ -19,131 +19,136 @@ test_seed:
 execute_tests:
 	@echo 'Executing test suite = $(SUITE)'
 
-	@mkdir -p output/$(SUITE)
+	@mkdir -p output/$(SUITE)/synth2/population/
+	@echo 'Executing population variation tests on Synth2...'
 
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test1.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 1 >> output/$(SUITE)/test1.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test2.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/test2.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test3.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/test3.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test4.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 1 >> output/$(SUITE)/test4.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test5.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/test5.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test6.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 1 >> output/$(SUITE)/test6.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test7.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/test7.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test8.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/test8.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test9.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/test9.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test10.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 0 >> output/$(SUITE)/test10.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test11.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 0 >> output/$(SUITE)/test11.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test12.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 0 >> output/$(SUITE)/test12.txt &
+	@echo 'Test Synth2: POP=20 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/population/test1.txt
+	python3 symbolic_regression.py 20 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/population/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/population/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/population/test2.txt
+	@echo 'Test Synth2: POP=200 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/population/test3.txt
+	python3 symbolic_regression.py 200 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/population/test3.txt
+	@echo 'Test Synth2: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/population/test4.txt
+	python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/population/test4.txt
+	@echo 'Test Synth2: POP=1000 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/population/test5.txt
+	python3 symbolic_regression.py 1000 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/population/test5.txt
 
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test13.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 1 >> output/$(SUITE)/test13.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test14.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/test14.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test15.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/test15.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test16.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 1 >> output/$(SUITE)/test16.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test17.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/test17.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test18.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 1 >> output/$(SUITE)/test18.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test19.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/test19.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test20.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/test20.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test21.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/test21.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test22.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 0 >> output/$(SUITE)/test22.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test23.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 0 >> output/$(SUITE)/test23.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test24.txt
-	@python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 0 >> output/$(SUITE)/test24.txt &
+	@echo 'Finished population variation tests on Synth2'
 
-	@echo 'Test Synth1: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test25.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 1 >> output/$(SUITE)/test25.txt &
-	@echo 'Test Synth2: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test26.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/test26.txt &
-	@echo 'Test Concrete: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test27.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/test27.txt &
-	@echo 'Test Synth1: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test28.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 1 >> output/$(SUITE)/test28.txt &
-	@echo 'Test Synth2: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test29.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/test29.txt &
-	@echo 'Test Concrete: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test30.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 1 >> output/$(SUITE)/test30.txt &
-	@echo 'Test Synth1: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test31.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/test31.txt &
-	@echo 'Test Synth2: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test32.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/test32.txt &
-	@echo 'Test Concrete: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test33.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/test33.txt &
-	@echo 'Test Synth1: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test34.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 0 >> output/$(SUITE)/test34.txt &
-	@echo 'Test Synth2: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test35.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 0 >> output/$(SUITE)/test35.txt &
-	@echo 'Test Concrete: POP=500 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test36.txt
-	@python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 0 >> output/$(SUITE)/test36.txt &
+	@mkdir -p output/$(SUITE)/synth2/generation/
+	@echo 'Executing generation variation tests on Synth2...'
 
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test49.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 1 >> output/$(SUITE)/test49.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test50.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/test50.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test51.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/test51.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.050 CROSS=0. K=19 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test52.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 10 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 1 >> output/$(SUITE)/test52.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.050 CROSS=0. K=19 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test53.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 10 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/test53.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.050 CROSS=0. K=19 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test54.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 10 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 1 >> output/$(SUITE)/test54.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test55.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/test55.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test56.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/test56.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test57.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/test57.txt &
-	@echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test58.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 0 >> output/$(SUITE)/test58.txt &
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test59.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 0 >> output/$(SUITE)/test59.txt &
-	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=5 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test60.txt
-	@python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 0 >> output/$(SUITE)/test60.txt &
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/generation/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/generation/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=40 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/generation/test2.txt
+	python3 symbolic_regression.py 100 40 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/generation/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=60 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/generation/test3.txt
+	python3 symbolic_regression.py 100 60 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/generation/test3.txt
+	@echo 'Test Synth2: POP=100 GEN=80 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/generation/test4.txt
+	python3 symbolic_regression.py 100 80 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/generation/test4.txt
+	@echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/generation/test5.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/generation/test5.txt
 
-	@echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test37.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 1 >> output/$(SUITE)/test37.txt &
-	@echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test38.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/test38.txt &
-	@echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test39.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/test39.txt &
-	@echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test40.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 1 >> output/$(SUITE)/test40.txt &
-	@echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test41.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/test41.txt &
-	@echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test42.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 1 >> output/$(SUITE)/test42.txt &
-	@echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test43.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/test43.txt &
-	@echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test44.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/test44.txt &
-	@echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test45.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/test45.txt &
-	@echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test46.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 0 0 >> output/$(SUITE)/test46.txt &
-	@echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test47.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 0 >> output/$(SUITE)/test47.txt &
-	@echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test48.txt
-	@python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 0 0 >> output/$(SUITE)/test48.txt
+	@echo 'Finished generation variation tests on Synth2'
+
+	@mkdir -p output/$(SUITE)/synth2/operators/
+	@echo 'Executing operators variation tests on Synth2...'
+
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/operators/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/operators/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.2 CROSS=0.7 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/operators/test2.txt
+	python3 symbolic_regression.py 100 20 0.2 0.7 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/operators/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/operators/test3.txt
+	python3 symbolic_regression.py 100 20 0.4 0.6 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/operators/test3.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.6 CROSS=0.4 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/operators/test4.txt
+	python3 symbolic_regression.py 100 20 0.6 0.4 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/operators/test4.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.9 CROSS=0.05 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/operators/test5.txt
+	python3 symbolic_regression.py 100 20 0.9 0.05 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/operators/test5.txt
+
+	@echo 'Finished operators variation tests on Synth2'
+
+	@mkdir -p output/$(SUITE)/synth2/tournament/
+	@echo 'Executing tournament variation tests on Synth2...'
+
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=1 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/tournament/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 1 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/tournament/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/tournament/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/tournament/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=4 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/tournament/test3.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 4 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/tournament/test3.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=10 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/tournament/test4.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 10 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/tournament/test4.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=50 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/tournament/test5.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 50 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/tournament/test5.txt
+
+	@echo 'Finished tournament variation tests on Synth2'
+
+	@mkdir -p output/$(SUITE)/synth2/elitist_operators/
+	@echo 'Executing elitist operators variation tests on Synth2...'
+
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test3.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test3.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test4.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test4.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test5.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test5.txt
+
+	@echo 'Finished elitist operators variation tests on Synth2'
+
+	@mkdir -p output/$(SUITE)/synth2/elitism/
+	@echo 'Executing elitism variation tests on Synth2...'
+
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test3.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test3.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test4.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test4.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test5.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test5.txt
+
+	@echo 'Finished elitism variation tests on Synth2'
+
+
+	@mkdir -p output/$(SUITE)/synth1/
+	@echo 'Executing best parameters test on Synth1...'
+
+	@echo 'Test Synth1: POP=100 GEN=50 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELIT=1 ELITOPS=0' > output/$(SUITE)/synth1/test.txt
+	python3 symbolic_regression.py 100 50 0.4 0.6 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 0 1 0 >> output/$(SUITE)/synth1/test.txt
 	
+	@echo 'Finished best parameters test on Synth1'
+
+
+	@mkdir -p output/$(SUITE)/concrete/operators/
+	@echo 'Executing operators variation on Concrete...'
+
+	@echo 'Test Concrete: POP=100 GEN=50 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/operators/test1.txt
+	python3 symbolic_regression.py 100 50 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/operators/test1.txt
+	@echo 'Test Concrete: POP=100 GEN=50 MUT=0.4 CROSS=0.6 K=2 SEED=0 ELIT=1 ELITOPS=0' > output/$(SUITE)/concrete/operators/test2.txt
+	python3 symbolic_regression.py 100 50 0.4 0.6 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 0 >> output/$(SUITE)/concrete/operators/test2.txt
+
+	@echo 'Finished operators variation on Concrete'
+
+	@mkdir -p output/$(SUITE)/concrete/tournament/
+	@echo 'Executing tournament variation on Concrete...'
+
+	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=1 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/tournament/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 1 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/tournament/test1.txt
+	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/tournament/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/tournament/test2.txt
+	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=4 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/tournament/test3.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 4 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/tournament/test3.txt
+	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=10 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/tournament/test4.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 10 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/tournament/test4.txt
+	@echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=50 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/concrete/tournament/test5.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 50 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 0 1 1 >> output/$(SUITE)/concrete/tournament/test5.txt
+
+	@echo 'Finished tournament variation on Concrete'
+
 	@echo 'Test suite = $(SUITE) fully generated. Check output on path ./output/$(SUITE)/'
