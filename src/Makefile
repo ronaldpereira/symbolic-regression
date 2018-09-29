@@ -94,31 +94,6 @@ execute_tests:
 	echo 'Test Concrete: POP=500 GEN=20 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test36.txt
 	python3 symbolic_regression.py 500 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 0 >> output/$(SUITE)/test36.txt &
 
-	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test37.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 1 >> output/$(SUITE)/test37.txt &
-	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test38.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1 1 >> output/$(SUITE)/test38.txt &
-	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test39.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 1 1 >> output/$(SUITE)/test39.txt &
-	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test40.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 0 1 >> output/$(SUITE)/test40.txt &
-	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test41.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 0 1 >> output/$(SUITE)/test41.txt &
-	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test42.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 1 >> output/$(SUITE)/test42.txt &
-	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test43.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 0 >> output/$(SUITE)/test43.txt &
-	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test44.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1 0 >> output/$(SUITE)/test44.txt &
-	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test45.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 1 0 >> output/$(SUITE)/test45.txt &
-	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test46.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 0 0 >> output/$(SUITE)/test46.txt &
-	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test47.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 0 0 >> output/$(SUITE)/test47.txt &
-	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test48.txt
-	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 0 >> output/$(SUITE)/test48.txt &
-
 	echo 'Test Synth1: POP=100 GEN=20 MUT=0.05 K=5 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test49.txt
 	python3 symbolic_regression.py 100 20 0.05 0.9 5 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 1 >> output/$(SUITE)/test49.txt &
 	echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 K=5 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test50.txt
@@ -143,3 +118,28 @@ execute_tests:
 	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 0 0 >> output/$(SUITE)/test59.txt &
 	echo 'Test Concrete: POP=100 GEN=20 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test60.txt
 	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 0 >> output/$(SUITE)/test60.txt &
+
+	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test37.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 1 >> output/$(SUITE)/test37.txt &
+	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test38.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1 1 >> output/$(SUITE)/test38.txt &
+	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=1' > output/$(SUITE)/test39.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 1 1 >> output/$(SUITE)/test39.txt &
+	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test40.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 0 1 >> output/$(SUITE)/test40.txt &
+	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test41.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 0 1 >> output/$(SUITE)/test41.txt &
+	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=1' > output/$(SUITE)/test42.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 1 >> output/$(SUITE)/test42.txt &
+	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test43.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 1 0 >> output/$(SUITE)/test43.txt &
+	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test44.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 1 0 >> output/$(SUITE)/test44.txt &
+	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=1 ELITOPERATORS=0' > output/$(SUITE)/test45.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 1 0 >> output/$(SUITE)/test45.txt &
+	echo 'Test Synth1: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test46.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth1/synth1-train.csv ./input/datasets/synth1/synth1-test.csv 1 0 0 >> output/$(SUITE)/test46.txt &
+	echo 'Test Synth2: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test47.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 1 0 0 >> output/$(SUITE)/test47.txt &
+	echo 'Test Concrete: POP=100 GEN=100 MUT=0.05 K=2 CROSS=0.9 SEED=1 ELISTIM=0 ELITOPERATORS=0' > output/$(SUITE)/test48.txt
+	python3 symbolic_regression.py 100 100 0.05 0.9 2 ./input/datasets/concrete/concrete-train.csv ./input/datasets/concrete/concrete-test.csv 1 0 0 >> output/$(SUITE)/test48.txt
