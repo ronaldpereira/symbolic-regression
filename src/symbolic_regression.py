@@ -6,7 +6,7 @@ import numpy as np
 import libs.data as data
 import libs.fitness as fitness
 import libs.statistics as statistics
-import libs.operands as operands
+import libs.operators as operators
 import libs.selection as selection
 import libs.individual as individual
 import libs.best_individual as best_individual
@@ -60,7 +60,7 @@ for generation in range(generations):
 
         newPopulation.extend(tour.execute(population))
 
-        ops = operands.Operands(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, activateElitistOperators)
+        ops = operators.Operators(newPopulation, populationSize, mutationProb, crossoverProb, dataHolder.nVariables, fit, stats, activateElitistOperators)
 
         population = ops.execute()
 

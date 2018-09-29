@@ -5,7 +5,7 @@ import numpy as np
 import libs.individual as individual
 import libs.tree as tree
 
-class Operands:
+class Operators:
     def __init__(self, population, desiredPopulationSize, mutationProb, crossoverProb, nVariables, fitnessObject, statisticsObject, activateElitistOperators):
         self.population = population
         self.desiredPopulationSize = desiredPopulationSize
