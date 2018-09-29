@@ -89,17 +89,17 @@ execute_tests:
 	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test1.txt
 	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test1.txt
 	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=0' > output/$(SUITE)/synth2/elitist_operators/test2.txt
-	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 0 >> output/$(SUITE)/synth2/elitist_operators/test2.txt
 
 	@echo 'Finished elitist operators variation tests on Synth2'
 
 	@mkdir -p output/$(SUITE)/synth2/elitism/
 	@echo 'Executing elitism variation tests on Synth2...'
 
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test1.txt
-	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test1.txt
-	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=0 ELITOPS=1' > output/$(SUITE)/synth2/elitist_operators/test2.txt
-	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitist_operators/test2.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=1 ELITOPS=1' > output/$(SUITE)/synth2/elitism/test1.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 1 1 >> output/$(SUITE)/synth2/elitism/test1.txt
+	@echo 'Test Synth2: POP=100 GEN=20 MUT=0.05 CROSS=0.9 K=2 SEED=0 ELIT=0 ELITOPS=1' > output/$(SUITE)/synth2/elitism/test2.txt
+	python3 symbolic_regression.py 100 20 0.05 0.9 2 ./input/datasets/synth2/synth2-train.csv ./input/datasets/synth2/synth2-test.csv 0 0 1 >> output/$(SUITE)/synth2/elitism/test2.txt
 
 	@echo 'Finished elitism variation tests on Synth2'
 
