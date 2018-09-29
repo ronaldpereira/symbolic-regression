@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import libs.tree as tree
-import libs.data as data
 
 class Individual:
     def __init__(self, fitnessObject, numberOfVariables, tree=None, method='grow'):

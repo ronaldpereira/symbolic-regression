@@ -1,9 +1,5 @@
 #!/usr/bin/python3
 
-import math
-from collections import Counter
-import copy
-
 class Statistics:
     def __init__(self):
         self.n_best_crossover_child = 0

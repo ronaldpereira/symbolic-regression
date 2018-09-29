@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import math
 import copy
 import numpy as np
 import libs.individual as individual

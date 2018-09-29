@@ -4,7 +4,6 @@ import sys
 import copy
 import numpy as np
 import libs.data as data
-import libs.tree as tree
 import libs.fitness as fitness
 import libs.statistics as statistics
 import libs.operands as operands
