@@ -1,0 +1,206 @@
+Test Synth2: POP=100 GEN=20 MUT=0.6 CROSS=0.4 K=2 SEED=0 ELIT=1 ELITOPS=1
+
+***Generation: 1 ***
+Best Individual: (math.sin(prot_math.log2(X[1])))
+Best Individual Fitness: 1.0000008511316272
+Worst Individual Fitness: inf
+Mean Fitness: inf
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 8
+Unique individuals: 92
+
+***Generation: 2 ***
+Best Individual: (math.sin(prot_math.log2(X[1])))
+Best Individual Fitness: 1.0000008511316272
+Worst Individual Fitness: 1.380858259587895
+Mean Fitness: 1.0152351474698782
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 98
+Unique individuals: 2
+
+***Generation: 3 ***
+Best Individual: ((X[0])/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9994657306237834
+Worst Individual Fitness: 1.0000008511316272
+Mean Fitness: 0.999995499926549
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 98
+Unique individuals: 2
+
+***Generation: 4 ***
+Best Individual: ((X[0])/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9994657306237834
+Worst Individual Fitness: 1.0000008511316272
+Mean Fitness: 0.9998563685945094
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 98
+Unique individuals: 2
+
+***Generation: 5 ***
+Best Individual: ((X[0])/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9994657306237834
+Worst Individual Fitness: 1.0000008511316272
+Mean Fitness: 0.9995245938796455
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 98
+Unique individuals: 2
+
+***Generation: 6 ***
+Best Individual: ((X[0])/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9994657306237834
+Worst Individual Fitness: 0.9994657306237834
+Mean Fitness: 0.9994657306237827
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 7 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9994657306237834
+Mean Fitness: 0.9992863803296883
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 97
+Unique individuals: 3
+
+***Generation: 8 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9994657306237834
+Mean Fitness: 0.9944377889751291
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 98
+Unique individuals: 2
+
+***Generation: 9 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9994657306237834
+Mean Fitness: 0.9909046407895883
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 97
+Unique individuals: 3
+
+***Generation: 10 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 11 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 12 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 13 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 14 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 15 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 16 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 17 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 18 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 19 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***Generation: 20 ***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Fitness: 0.9858766991409357
+Worst Individual Fitness: 0.9858766991409357
+Mean Fitness: 0.9858766991409348
+Crossover child worse than fathers' mean: 0
+Crossover child better than fathers' mean: 0
+Repeated individuals: 99
+Unique individuals: 1
+
+***TEST STATISTICS***
+Best Individual: (((X[0])*(X[1]))/prot_math.div(60.789867188592666))
+Best Individual Train Fitness: 0.9858766991409357
+Best Individual Test Fitness: 0.9874128426070813
